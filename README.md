@@ -27,3 +27,12 @@ CREATE USER 'moodleuser'@'localhost' IDENTIFIED BY 'TuPasswordSegura'; #Puedes c
 GRANT ALL PRIVILEGES ON moodle.* TO 'moodleuser'@'localhost';
 FLUSH PRIVILEGES;
 EXIT;
+
+Configuración de red estática para el servidor:
+Para configurar la red estática se deben seguir 2 sencillos pasos muy importantes para esto.
+  -Paso 1: Ejecutar el comando "ip route | grep default" y buscar "default via xxx.xxx.x.xxx dev enp0s3 (o similares) para poder saber cuál es el gateway (dirección IP del router).
+  -Paso 2: Editar el archivo en el siguiente directorio: /etc/network/interfaces y buscar la línea que coincida con la interfaz de salida (en este caso enp0s3) y cambiar los siguientes comandos
+  iface enp0s3 inet static
+    address 192.168.1.131
+    netmask 255.255.255.0
+    gateway 192.168.1.254    # <--- Cambiar por la dirección IP default revisada en el paso 1
