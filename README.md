@@ -9,7 +9,7 @@ Si por algún motivo falla o no se activa solo, usar los comandos: sudo a2enmod 
 Una vez configurado todo lo de apache hay que preparar una base de datos para moodle, en este caso usarmeos mariadb, el cuál se descargará con los comandos: sudo apt install mariadb-server.
 Una vez descargado se debe ejecutar el siguiente comando: sudo mysql_secure_installation para configurar la contraseña de root y eliminar los usuarios anonimos.
 
-Para asegurar que apache está ejecutando correctamente php vamos a agregar un archivo de prueba: /var/www/html/prueba.php y entraremos a http://localhost/prueba.php, si entra correctamente, significa que está todo correctamente configurado.
+Para asegurar que apache está ejecutando correctamente php vamos a agregar un archivo de prueba: /var/www/html/prueba.php, pegaremos el siguiente comando: <?php phpinfo(); ?> y entraremos a http://localhost/prueba.php, si entra correctamente, significa que está todo correctamente configurado.
 
 Para descargar moodle se usará el siguiente comando, preferiblemente en el directorio: /var/www/html, al descargar el archivo .tgz y descomprimirlo se creará automáticamente el directorio /moodle.
 Comando: sudo wget https://download.moodle.org/download.php/direct/moodle/moodle-latest.tgz
