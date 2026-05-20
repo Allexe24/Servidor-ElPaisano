@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIBLIOTECA DE JUEGOS - EL PAISANO</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #004B87;
+            margin-bottom: 10px;
+            font-size: 2.2em;
+            text-align: center;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .grid-juegos {
+            display: flex;
+            gap: 30px;
+            max-width: 800px;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .card-juego {
+            background: white;
+            border-top: 5px solid #009B77;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            flex: 1;
+            min-width: 280px;
+            max-width: 350px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card-juego h2 {
+            color: #004B87;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        .card-juego p {
+            color: #555;
+            font-size: 0.95em;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+        .btn-jugar {
+            display: inline-block;
+            background-color: #004B87;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            font-weight: bold;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+        .btn-jugar:hover { background-color: #003366; }
+        .btn-regresar {
+            margin-top: 50px;
+            color: #004B87;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        .btn-regresar:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <h1>Biblioteca de Juegos Educativos</h1>
+    <p class="subtitle">Selecciona una actividad para comenzar a practicar</p>
+
+    <div class="grid-juegos">
+        <div class="card-juego">
+            <div>
+                <h2>Crucigrama</h2>
+                <p>Pon a prueba tus conocimientos resolviendo el mapa de palabras clave sobre los temas vistos en clase.</p>
+            </div>
+            <a href="/juegos/crucigrama/" class="btn-jugar">Jugar ahora</a>
+        </div>
+
+        <div class="card-juego">
+            <div>
+                <h2>Memorama</h2>
+                <p>Encuentra los pares correspondientes y ejercita tu memoria visual con los conceptos principales.</p>
+            </div>
+            <a href="/juegos/memorama/" class="btn-jugar">Jugar ahora</a>
+        </div>
+    </div>
+
+    <a href="/" class="btn-regresar">← Volver al Portal Principal</a>
+
+</body>
+</html>
