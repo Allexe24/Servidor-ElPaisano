@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SISTEMA EL PAISANO</title>
+    <style>
+        /* Restablecimiento global y tipografía */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #ffffff;
+            color: #333333;
+        }
+
+        /* 1. BARRA SUPERIOR (HEADER) */
+        header {
+            background-color: #004B87; /* Azul institucional UV */
+            color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 40px;
+            border-bottom: 4px solid #009B77; /* Línea verde Veracruz superior */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .header-left img {
+            height: 45px;
+            width: auto;
+        }
+        .header-left h1 {
+            font-size: 1.4em;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        nav span {
+        	color: rgba(255, 255, 255, 0.9);
+        	margin-left: 20px;
+        	font-size: 0.95em;
+        	font-weight: 500;
+        }
+
+        /* 2. ÁREA PRINCIPAL DIVIDIDA (MAIN SPLIT) */
+        .main-container {
+            display: flex;
+            flex: 1;
+        }
+
+        /* Panel Izquierdo (Moodle y Videojuegos) */
+        .left-panel {
+            width: 35%;
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #ffffff;
+        }
+        .section-block {
+            margin-bottom: 45px;
+        }
+        .section-block:last-child {
+            margin-bottom: 0;
+        }
+        .section-block h2 {
+            font-size: 1.8em;
+            color: #004B87;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .section-block p {
+            font-size: 1em;
+            color: #666666;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .btn-link {
+            text-decoration: none;
+        }
+        .btn-link input[type="button"] {
+            background-color: #004B87;
+            color: #ffffff;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1em;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        .btn-link input[type="button"]:hover {
+            background-color: #003366;
+        }
+        .btn-link input[type="button"]:active {
+            transform: scale(0.98);
+        }
+
+        /* Panel Derecho (Banner Informativo con Fondo Geométrico SVG) */
+        .right-panel {
+            width: 65%;
+            background-color: #005691;
+            /* Patrón geométrico abstracto generado con CSS puro (Seguro para entornos offline) */
+            background-image: linear-gradient(135deg, #004b87 25%, transparent 25%), 
+                              linear-gradient(225deg, #004b87 25%, transparent 25%), 
+                              linear-gradient(45deg, #004b87 25%, transparent 25%), 
+                              linear-gradient(315deg, #004b87 25%, #005691 25%);
+            background-position: 40px 0, 40px 0, 0 0, 0 0;
+            background-size: 80px 80px;
+            background-repeat: repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            border-left: 1px solid rgba(255,255,255,0.1);
+        }
+        .info-card {
+            background-color: rgba(0, 39, 73, 0.85);
+            backdrop-filter: blur(5px);
+            border-left: 5px solid #009B77; /* Detalle en verde */
+            padding: 35px;
+            border-radius: 8px;
+            max-width: 600px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        .info-card p {
+            color: #ffffff;
+            font-size: 1.15em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .info-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 3. PIE DE PÁGINA CON LÍNEAS DECORATIVAS (FOOTER) */
+        footer {
+            background-color: #f8f9fa;
+            position: relative;
+            padding: 25px 40px 15px 40px;
+            border-top: 1px solid #e9ecef;
+        }
+        /* Líneas decorativas entrelazadas simuladas mediante bordes múltiples */
+        .decorative-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(to right, 
+                #004B87 0%, #004B87 50%, 
+                #009B77 50%, #009B77 100%);
+            background-size: 40px 100%; /* Crea un patrón repetitivo de líneas azul/verde */
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85em;
+            color: #666666;
+        }
+        .footer-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .mini-badge {
+            background-color: #004B87;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <img src="logo_uv.png" alt="UV" onerror="this.style.display='none';">
+            <h1>SISTEMA EL PAISANO</h1>
+        </div>
+        <nav>
+        	<span>Veracruz, México</span>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        
+        <div class="left-panel">
+            <div class="section-block">
+                <h2>Aprendizaje didáctico (Moodle)</h2>
+                <p>Plataforma oficial para acceder a los cursos locales, materiales interactivos y evaluaciones del centro educativo de forma offline.</p>
+                <a href="/moodle" class="btn-link">
+                    <input type="button" value="Ir a clases">
+                </a>
+            </div>
+
+            <div class="section-block">
+                <h2>Videojuegos</h2>
+                <p>Repositorio local con títulos optimizados y software de entretenimiento educativo para los jóvenes de la comunidad.</p>
+                <a href="/juegos" class="btn-link">
+                    <input type="button" value="Ir a juegos">
+                </a>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <div class="info-card">
+                <p>Servidor para aprendizaje didáctico "El Paisano".</p>
+                <p>Proyecto implementado por el equipo de la clase de Administración de Servidores, impartida por el profesor Gerardo Contreras Vega.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="decorative-bar"></div>
+        <div class="footer-content">
+            <div>Universidad Veracruzana - El Paisano | Veracruz, México</div>
+            <div class="footer-right">
+                <span>© 2026 Universidad Veracruzana</span>
+                <span class="mini-badge">UV</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
