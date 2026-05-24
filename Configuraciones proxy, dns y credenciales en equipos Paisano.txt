@@ -1,0 +1,7 @@
+Para configurar el proxy en las máquinas con Windows se debe ir a la configuración de red y buscar la pestaña de proxy, en esta se debe activar la opción "Usar servidor Proxy", poner la dirección IP y el puerto (3128)
+y darle en guardar.
+Para configurar el dns en Windows debemos entrar a Panel de Control > Redes e Internet > Conexiones de red y en el dispositivo de red usado (Ethernet o Wifi) dar click derecho e ir al ícono de propiedades, una vez
+en este buscar la opción "Protocolo de Internet versión 4 (TCP/IPv4)". En general buscar "Usar las siguientes direcciones de servidor DNS" y colocar la IP del servidor.
+Para configurar las credenciales se debe usar el archivo certificador y ejecutarlo con doble click, dar en añadir credencial, elegir el equipo actual (para que puedan usar la credencial todos los equipos, es necesario
+poner la credencial a nivel local) y entonces buscar la dirección de la certificación, en "Colocar todos los certificados en el siguiente almacen", donde daremos en examinar y buscaremos la carpeta "Entidades de 
+certificación raíz de confianza" y le daremos a siguiente, una vez se agregue la certificación podemos cerrar este panel
