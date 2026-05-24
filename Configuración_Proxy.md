@@ -3,15 +3,20 @@
 
 ## Instalación de Squid
 
+```bash
 sudo apt update
 sudo apt install squid
-
+```
 ## Respaldar configuración 
+```bash
 sudo cp /etc/squid/squid.conf /etc/squid/squid.conf.backup
+```
 
 ## Configuración Principal
-sudo nano /etc/squid/squid.conf
 
+```bash
+sudo nano /etc/squid/squid.conf
+```
 
 El sistema se basa en la modificación y creación de dos archivos principales dentro del directorio de configuración de Squid (/etc/squid/):
 
@@ -50,6 +55,18 @@ http_access deny all
 
 
 
-# Gestión del Servicio
+## Gestión del Servicio
 
+Iniciar el servicio
+```
+sudo systemctl enable squid
+```
+Reiniciar el servicio (cuando haya un cambio)
+```
+sudo systemctl restart squid
+```
 
+Verificar el estado del servicio
+```
+sudo systemctl status squid
+```
