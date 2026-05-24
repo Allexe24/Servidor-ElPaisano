@@ -1,7 +1,7 @@
 # Configuración de Proxy
 
 
-##Instalación de Squid
+## Instalación de Squid
 
 sudo apt update
 sudo apt install squid
@@ -27,29 +27,29 @@ Este archivo debe crearse en el mismo directorio que squid.conf (/etc/squid/siti
 .reddit.com
 .tiktok.com
 .apuestas.com
+```
 
-# 1. Definición del puerto en el que escucha el proxy (por defecto 3128)
-http_port 3128
 
-# 2. DEFINICIÓN DE ACLs (Access Control Lists)
 
-## ACL estándar para la red local
+## 2. DEFINICIÓN DE ACLs (Access Control Lists)
+
+### ACL estándar para la red local
 acl localnet src 192.168.100.0/24
 
-## ACL Personalizada:
+### ACL Personalizada:
 acl bloqueados dstdomain "/etc/squid/sitios_bloqueados.txt"
 
-# 3. REGLAS DE CONTROL DE ACCESO (http_access)
+## 3. REGLAS DE CONTROL DE ACCESO (http_access)
 http_access deny bloqueados
 
-## Permitir el acceso a la red local
+### Permitir el acceso a la red local
 http_access allow localnet
 
-## Denegar cualquier otra petición que no cumpla las condiciones anteriores
+### Denegar cualquier otra petición que no cumpla las condiciones anteriores
 http_access deny all
 
 
 
-#Gestión del Servicio
+# Gestión del Servicio
 
 
