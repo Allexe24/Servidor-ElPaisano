@@ -87,4 +87,142 @@ sudo mkdir -p /var/www/html/juegos
 # Otorgar permisos de propiedad y lectura al servidor web Apache (www-data)
 sudo chown -R www-data:www-data /var/www/html/juegos
 sudo chmod -R 755 /var/www/html/juegos
+```
+## Configuracion de IP del servidor previo al DNS
++ Asignar una direccion estatica permanente al servidor
+```bash
+  # Editar el archivo:
+  sudo $EDITOR /etc/network/interfaces
+ # NOTA: Eliminar o comentar las lineas de dhcp
+ # Escribir en la interfaz a editar:
+  auto enp0s3 --- (wlp8s0 | enp7s0)
+  iface enp0s3 inet static
+    address 192.168.100.2
+    netmask 255.255.255.0
+    gateway 192.168.100.1
+    dns-nameservers 8.8.8.8 1.1.1.1
+    dns-nameservers 192.168.100.2
 
+  # Reiniciar servicio de networking y verificar IP: 
+  sudo systemctl restart networking
+  ip a
+```
+## Instalar el servicio de DNS
+```bash
+sudo apt install bind9
+# Verificar el estado sel servicio:
+sudo systemctl stop|start|restart|status named.service
+```
++ Configurar el archivo de configuracion
+```bash
+   # Editar el archivo:
+  sudo $EDITOR /etc/bind/named.conf.options
+  options {
+
+	directory "/var/cache/bind";
+	recursion yes;
+	allow-query { localhost; 127.0.0.1;
+	192.168.100.2/24; };   ----- la red a la que estes conectado
+	forwarders {
+		192.168.100.1;   ---- IP del gateway
+		8.8.8.8;
+    1.1.1.1;
+	};
+	dnssec-validation no;
+	listen-on { 127.0.0.1; 192.168.100.2; };
+	listen-on-v6 { ::1; };
+};
+
+# Verificar configuracion:
+sudo named-checkconf
+# Reiniciar demonio:
+systemctl daemon-reload
+# Reiniciar servicio:
+Sudo systemctl restart named.service
+```
++ Configurar la zona
+```bash
+# Editar el archivo
+sudo $EDITOR /etc/bind/named.conf.local
+
+  zone "licic.tux"{
+	type master;
+	file "/etc/bind/db.licic.tux";
+	allow-transfer{none;};
+};
+```
++ Crear la base de datos de la zona
+```bash
+# Crear el archivo de base de datos:
+sudo $EDITOR /etc/bind/db.licic.tux
+
+$TTL 		604800
+@			  IN		SOA		licic.tux. root.licic.tux. (
+							0422202601		; Serial
+							604800		  	; Refresh
+							86400			    ; Retry
+							2419200		  	; Expire
+							604800 )			; Negative Cache TTL
+
+@ 			IN 		NS		ns.licic.tux.
+ns			IN		A		  192.169.100.2
+@       IN    A     192.168.100.2
+www			IN 		A 		192.168.100.2
+
+# Verificar que la zona y la base de datos estan bien configuradas:
+sudo named-checkzone licic.tux db.licic.tux
+# Reiniciar el servicio
+sudo systemctl restart named.service
+```
++ Crear la zona inversa
+```bash
+# Agregar en el archivo:
+sudo $EDITOR /etc/bind/named.conf.local
+
+  zone "100.168.192.in-addr.arpa" { --- IP al revez sin la parte de host
+	type master;
+	file "/etc/bind/db.192.168.100";
+};
+```
++ Crear la base de datos de la zona inversa
+```bash
+# Crear el archivo:
+sudo $EDITOR /etc/binf/ db.100.168.192
+
+$TTL    604800
+@       IN      SOA     licic.tux. root.licic.tux. (
+                        2026052101      ; Serial 
+                            604800      ; Refresh
+                             86400      ; Retry
+                           2419200      ; Expire
+                            604800 )    ; Negative Cache TTL
+
+@       IN      NS      ns.licic.tux.
+2       IN      PTR     licic.tux.
+2       IN      PTR     www.licic.tux.
+2       IN      PTR     ns.licic.tux.
+
+# Verificar que la zona inversa y su base de datos estan bien configuradas
+sudo named-checkzone 100.168.192.in-addr.arpa db.100.168.192
+# Reiniciar el servicio
+sudo systemctl restart named.service
+```
++ Comprobar que el DNS funciona
+  - En los clientes con Linux, agrear la IP al archivo
+    ```bash
+    sudo $EDITOR /etc/resolv.conf
+    nameserver 192.168.100.2
+    ```
+  - En la barra del navegador verificar si el DNS resuleve el dominio
+    http://www.licic.tux
+    http://licic.tux
+
+  - Comprobar el DNS desde la linea de comandos
+    ```bash
+    dig www.licic.tux @192.168.100.2
+    nslookup www.licic.tux
+    ```
+  - Comprobar en linea de comandos (zona inversa)
+    ```bash
+    nslookup 192.168.100.2
+    ```
