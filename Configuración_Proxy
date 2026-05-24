@@ -1,0 +1,18 @@
+# Configuración de Proxy
+
+El sistema se basa en la modificación y creación de dos archivos principales dentro del directorio de configuración de Squid (/etc/squid/):
+
+1. **`squid.conf`**: El archivo de configuración principal de Squid. Aquí se definen las reglas de control de acceso (ACLs), los puertos de escucha y la lógica de bloqueo.
+2. **`sitios_bloqueados.txt`**: Una lista negra en texto plano que contiene los dominios de los sitios web que deben ser restringidos para los menores.
+
+### 1. `sitios_bloqueados.txt`
+Este archivo debe crearse en el mismo directorio que squid.conf (/etc/squid/sitios_bloqueados.txt). Contiene los nombres de dominio de las páginas que se desean bloquear, un elemento por línea.
+
+**Ejemplo de contenido:**
+```text
+.x.com
+.reddit.com
+.tiktok.com
+.apuestas.com
+
+
