@@ -64,6 +64,7 @@ sudo journalctl -u isc-dhcp-server -f
 nmcli device connect wlp8s0
 
 # Forzar a clienta a tomar una direccion IP del servidor
+sudo dhclient -v -s 192.168.100.2 "interfaz"
 
 
 
